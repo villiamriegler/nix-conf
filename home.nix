@@ -13,6 +13,7 @@
 		waybar
 		swaybg
 		swayidle
+		hyprlock
 	];
 
 	services.polkit-gnome.enable = true;

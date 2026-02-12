@@ -56,7 +56,9 @@
     isNormalUser = true;
     description = "villiamr";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    packages = with pkgs; [
+    	google-chrome
+    ];
   };
 
   # Allow unfree packages
@@ -69,6 +71,8 @@
 	wget
 	niri
 	xwayland-satellite
+	pavucontrol
+	networkmanagerapplet
   ];
 
   programs.niri.enable = true;
@@ -86,8 +90,17 @@
   };
   
   services.gnome.gnome-keyring.enable = true;
+  services.pipewire = {
+  	enable = true;
+  	pulse.enable = true;
+	alsa = {
+		enable = true;
+		support32Bit = true;
+	};
+  };
 
   security.polkit.enable = true;
+  security.pam.services.hyprlock = {};
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
