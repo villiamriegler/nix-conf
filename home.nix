@@ -1,12 +1,16 @@
 { config, pkgs, ... } : 
 
 {
+	imports = [
+		./modules/home
+	];
+
 	home.username = "villiamr";
 	home.homeDirectory = "/home/villiamr";
 
 	home.packages = with pkgs; [
-		neovim
 		git
+		kitty
 		alacritty
 		fuzzel
 		mako
@@ -14,6 +18,7 @@
 		swaybg
 		swayidle
 		hyprlock
+		eww
 	];
 
 	services.polkit-gnome.enable = true;
@@ -25,6 +30,13 @@
 			user.email = "ville@riegler.se";
 		};
 	};
+
+	programs.kitty = {
+		enable = true;
+		font.name = "JetBrainsMono NF";
+		font.package = pkgs.nerd-fonts.jetbrains-mono;
+	};
+
 
 	home.stateVersion = "25.11";
 

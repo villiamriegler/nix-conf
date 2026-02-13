@@ -56,6 +56,7 @@
     isNormalUser = true;
     description = "villiamr";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
     packages = with pkgs; [
     	google-chrome
     ];
@@ -76,6 +77,7 @@
   ];
 
   programs.niri.enable = true;
+  programs.zsh.enable = true;
 
   fonts.packages = with pkgs; [
   	nerd-fonts.jetbrains-mono
@@ -98,6 +100,7 @@
 		support32Bit = true;
 	};
   };
+  services.libinput.enable = true;
 
   security.polkit.enable = true;
   security.pam.services.hyprlock = {};
@@ -113,7 +116,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
