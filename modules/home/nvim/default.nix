@@ -1,10 +1,19 @@
 { config, pkgs, ... } : 
 
 {
-	home.packages = with pkgs; [
-		neovim
-		gcc # Required for tree-sitter
-	];
+	programs.neovim = {
+	  enable = true;
+
+	  extraPackages = with pkgs; [
+	    unzip
+	    kdePackages.qtdeclarative
+	    lua-language-server
+	    gnumake
+	    gcc 
+	    ripgrep
+	    fd
+	  ];
+	};
 
 	xdg.configFile."nvim" = {
 		source = ./conf;

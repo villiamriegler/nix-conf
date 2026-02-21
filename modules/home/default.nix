@@ -5,5 +5,6 @@
 		./zsh
 		./nvim
 		./niri
+		./quickshell
 	];
 }
