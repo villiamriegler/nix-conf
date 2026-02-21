@@ -18,7 +18,7 @@
 		swaybg
 		swayidle
 		hyprlock
-		eww
+		lazygit
 	];
 
 	services.polkit-gnome.enable = true;
