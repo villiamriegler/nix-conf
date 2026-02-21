@@ -4,5 +4,6 @@
 	imports = [
 		./zsh
 		./nvim
+		./niri
 	];
 }
