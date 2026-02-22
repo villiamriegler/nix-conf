@@ -2,7 +2,8 @@
 vim.lsp.enable({
   "qmlls",
   "lua_ls",
-  "nixd"
+  "nixd",
+  "nil_ls"
 })
 
 vim.diagnostic.config({

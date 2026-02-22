@@ -1,11 +1,11 @@
-{ ... } : 
+{ ... }:
 
 {
-	imports = [
-		./zsh
-		./nvim
-		./niri
-		./quickshell
-		./kitty
-	];
+  imports = [
+    ./zsh
+    ./nvim
+    ./niri
+    ./quickshell
+    ./kitty
+  ];
 }

@@ -1,25 +1,26 @@
-{ config, pkgs, ... } : 
+{ config, pkgs, ... }:
 
 {
-	programs.neovim = {
-	  enable = true;
+  programs.neovim = {
+    enable = true;
 
-	  extraPackages = with pkgs; [
-	    unzip
-	    kdePackages.qtdeclarative
-	    lua-language-server
-	    gnumake
-	    gcc 
-		nixd
-		ripgrep
-		fd
-		luarocks
-		python3
-		tree-sitter
-	  ];
-	};
+    extraPackages = with pkgs; [
+      unzip
+      kdePackages.qtdeclarative
+      lua-language-server
+      gnumake
+      gcc
+      nixd
+      nil
+      ripgrep
+      fd
+      luarocks
+      python3
+      tree-sitter
+    ];
+  };
 
-	xdg.configFile."nvim" = {
-		source = ./conf;
-	};
+  xdg.configFile."nvim" = {
+    source = ./conf;
+  };
 }

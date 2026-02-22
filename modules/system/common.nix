@@ -1,8 +1,19 @@
 { config, pkgs, ... }:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
+  # Hard link all bit-by-bit identitcal files in the store
+  nix.settings.auto-optimise-store = true;
+  # Run nix-collect-garbage weekly deleting anyting older than a week
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -41,10 +52,13 @@
   users.users.villiamr = {
     isNormalUser = true;
     description = "villiamr";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     shell = pkgs.zsh;
     packages = with pkgs; [
-    	google-chrome
+      google-chrome
     ];
   };
 
@@ -54,42 +68,42 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim 
-	wget
-	niri
-	xwayland-satellite
-	pavucontrol
-	networkmanagerapplet
+    vim
+    wget
+    niri
+    xwayland-satellite
+    pavucontrol
+    networkmanagerapplet
   ];
 
   programs.niri.enable = true;
   programs.zsh.enable = true;
 
   fonts.packages = with pkgs; [
-  	nerd-fonts.jetbrains-mono
+    nerd-fonts.jetbrains-mono
   ];
 
   xdg.portal = {
-	enable = true;
-	extraPortals = with pkgs; [
-		xdg-desktop-portal-gtk
-		xdg-desktop-portal-gnome
-	];
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
+    ];
   };
-  
+
   services.gnome.gnome-keyring.enable = true;
   services.pipewire = {
-  	enable = true;
-  	pulse.enable = true;
-	alsa = {
-		enable = true;
-		support32Bit = true;
-	};
+    enable = true;
+    pulse.enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
   };
   services.libinput.enable = true;
 
   security.polkit.enable = true;
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

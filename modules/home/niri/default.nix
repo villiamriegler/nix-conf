@@ -1,7 +1,7 @@
-{ config, pkgs, ... } : 
+{ config, pkgs, ... }:
 
 {
-  xdg.configFile."niri/config.kdl" = { 
+  xdg.configFile."niri/config.kdl" = {
     source = ./config.kdl;
   };
 }
