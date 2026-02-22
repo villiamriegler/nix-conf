@@ -10,8 +10,12 @@
 	    lua-language-server
 	    gnumake
 	    gcc 
-	    ripgrep
-	    fd
+		nixd
+		ripgrep
+		fd
+		luarocks
+		python3
+		tree-sitter
 	  ];
 	};
 
