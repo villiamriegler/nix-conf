@@ -19,6 +19,7 @@
 		swayidle
 		hyprlock
 		lazygit
+		neofetch
 	];
 
 	services.polkit-gnome.enable = true;

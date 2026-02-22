@@ -6,5 +6,6 @@
 		./nvim
 		./niri
 		./quickshell
+		./kitty
 	];
 }
