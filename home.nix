@@ -11,7 +11,6 @@
   home.packages = with pkgs; [
     git
     kitty
-    alacritty
     fuzzel
     mako
     swaybg
@@ -20,8 +19,22 @@
     lazygit
     neofetch
     fastfetch
+	discord
     tree
   ];
+
+  home.pointerCursor = {
+    name = "Bibata-Modern-Ice";
+    package = pkgs.bibata-cursors;
+    size = 24;
+    gtk.enable = true;
+    x11.enable = true;
+  };
+
+  home.sessionVariables = {
+    XCURSOR_THEME = "Bibata-Modern-Ice";
+    XCURSOR_SIZE = "24";
+  };
 
   programs.zen-browser.enable = true;
 
