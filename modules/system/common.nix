@@ -15,21 +15,18 @@
     options = "--delete-older-than 7d";
   };
 
-  # Prefer intel iGPU for video decoding https://wiki.nixos.org/wiki/Accelerated_Video_Playback
-  # but keep nvidia as fallback even though it is not officially supported
+  # Enable video decoding with vaapi
   hardware.graphics = {
     enable = true;
 
     extraPackages = with pkgs; [
       libva
-      #libvdpau
 	  nvidia-vaapi-driver
-      #intel-media-driver
-	  #intel-vaapi-driver
     ];
   };
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "nvidia";
+	MOZ_DISABLE_RDD_SANDBOX = "1";
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];

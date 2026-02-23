@@ -19,9 +19,9 @@
     lazygit
     neofetch
     fastfetch
-	discord
+    discord
     tree
-	firefox
+    firefox
   ];
 
   home.pointerCursor = {
@@ -37,7 +37,19 @@
     XCURSOR_SIZE = "24";
   };
 
-  programs.zen-browser.enable = true;
+  programs.zen-browser = {
+    enable = true;
+	profiles.default.settings = {
+		# Force harware acceleration
+		"media.av1.enabled" = false;
+        "media.ffmpeg.vaapi.enabled" = true;
+
+        # NVIDIA / Wayland stability knobs
+        "media.hardware-video-decoding.force-enabled" = true;
+        "gfx.webrender.all" = true;
+        "widget.dmabuf.force-enabled" = true;
+	};
+  };
 
   services.polkit-gnome.enable = true;
 
