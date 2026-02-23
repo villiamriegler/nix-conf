@@ -21,6 +21,7 @@
     fastfetch
 	discord
     tree
+	firefox
   ];
 
   home.pointerCursor = {
