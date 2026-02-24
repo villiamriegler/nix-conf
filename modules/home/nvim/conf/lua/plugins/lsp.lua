@@ -1,9 +1,22 @@
 return {
 	{ 'neovim/nvim-lspconfig' },
 	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		build = ":Copilot auth",
+		event = "InsertEnter",
+		opts = {
+			suggestion = { enable = false },
+			panel = { enable = false },
+		}
+	},
+	{
 		'saghen/blink.cmp',
 		-- optional: provides snippets for the snippet source
-		dependencies = { 'rafamadriz/friendly-snippets' },
+		dependencies = {
+			'rafamadriz/friendly-snippets',
+			"fang2hou/blink-copilot"
+		},
 
 		-- use a release tag to download pre-built binaries
 		version = '1.*',
@@ -27,7 +40,11 @@ return {
 			-- C-k: Toggle signature help (if signature.enabled = true)
 			--
 			-- See :h blink-cmp-config-keymap for defining your own keymap
-			keymap = { preset = 'enter' },
+			keymap = {
+				preset = 'enter',
+				['<Tab>'] = { "select_next", "fallback" },
+				['<S-Tab>'] = { "select_prev", "fallback" },
+			},
 
 			appearance = {
 				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
@@ -41,7 +58,15 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { 'lsp', 'path', 'snippets', 'buffer' },
+				default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
+				providers = {
+					copilot = {
+						name = "copilot",
+						module = "blink-copilot",
+						score_offset = 100,
+						async = true
+					}
+				}
 			},
 
 			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance

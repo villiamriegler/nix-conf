@@ -17,6 +17,7 @@
       luarocks
       python3
       tree-sitter
+	  nodePackages.nodejs
     ];
   };
 
