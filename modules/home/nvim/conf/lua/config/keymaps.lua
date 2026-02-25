@@ -26,6 +26,7 @@ local keymaps = {
 	{ "n", "gD",         vim.lsp.buf.definition,                            { desc = "Goto declaration" } },
 	{ "n", "gic",        vim.lsp.buf.incoming_calls,                        { desc = "List all incomming calls of symbol" } },
 	{ "n", "goc",        vim.lsp.buf.outgoing_calls,                        { desc = "List all outgoing calls calls of symbol" } },
+	{ "n", "grr",        vim.lsp.buf.references,                            { desc = "Show all references to symbol" } },
 	{ "n", "K",          vim.lsp.buf.hover,                                 { desc = "Lsp show definition" } },
 
 	-- tabnav
@@ -33,6 +34,7 @@ local keymaps = {
 	{ "n", "H",          ":BufferPrevious<Cr>",                             { desc = "Tab left" } },
 	{ "n", "<leader>H",  ":BufferMovePrevious<Cr>",                         { desc = "Tab move left" } },
 	{ "n", "<leader>L",  ":BufferMoveNext<Cr>",                             { desc = "Tab move right" } },
+	{ "n", "<C-q>",      ":BufferClose<Cr>",                                { desc = "Close buffer" } },
 
 	-- splitnav
 	{ "n", "<C-l>",      "<C-w>l",                                          { desc = "Move win right" } },
