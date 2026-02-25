@@ -18,6 +18,8 @@
       python3
       tree-sitter
 	  nodePackages.nodejs
+	  pyright
+	  python314Packages.python-lsp-server
     ];
   };
 

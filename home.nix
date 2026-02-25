@@ -8,6 +8,13 @@
   home.username = "villiamr";
   home.homeDirectory = "/home/villiamr";
 
+  programs.direnv = {
+	  enable = true;
+
+	  enableZshIntegration = true;
+	  nix-direnv.enable = true;
+  };
+
   home.packages = with pkgs; [
     git
     kitty
@@ -39,16 +46,16 @@
 
   programs.zen-browser = {
     enable = true;
-	profiles.default.settings = {
-		# Force harware acceleration
-		"media.av1.enabled" = false;
-        "media.ffmpeg.vaapi.enabled" = true;
+    profiles.default.settings = {
+      # Force harware acceleration
+      "media.av1.enabled" = false;
+      "media.ffmpeg.vaapi.enabled" = true;
 
-        # NVIDIA / Wayland stability knobs
-        "media.hardware-video-decoding.force-enabled" = true;
-        "gfx.webrender.all" = true;
-        "widget.dmabuf.force-enabled" = true;
-	};
+      # NVIDIA / Wayland stability knobs
+      "media.hardware-video-decoding.force-enabled" = true;
+      "gfx.webrender.all" = true;
+      "widget.dmabuf.force-enabled" = true;
+    };
   };
 
   services.polkit-gnome.enable = true;

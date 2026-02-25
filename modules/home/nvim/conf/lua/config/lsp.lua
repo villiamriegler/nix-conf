@@ -3,7 +3,9 @@ vim.lsp.enable({
   "qmlls",
   "lua_ls",
   "nixd",
-  "nil_ls"
+  "nil_ls",
+  "pyright",
+  "pylsp"
 })
 
 vim.diagnostic.config({
