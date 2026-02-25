@@ -29,6 +29,9 @@
     discord
     tree
     firefox
+	obs-studio
+	obsidian
+	spotify
   ];
 
   home.pointerCursor = {
