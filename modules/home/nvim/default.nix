@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
   programs.neovim = {
@@ -16,11 +16,13 @@
       fd
       luarocks
       python3
-      tree-sitter
 	  nodePackages.nodejs
 	  pyright
 	  python314Packages.python-lsp-server
-    ];
+    ] ++ [
+	  inputs.tree-sitter.packages.${pkgs.system}.cli
+	];
+
   };
 
   xdg.configFile."nvim" = {
