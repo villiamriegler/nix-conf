@@ -21,12 +21,12 @@
 
     extraPackages = with pkgs; [
       libva
-	  nvidia-vaapi-driver
+      nvidia-vaapi-driver
     ];
   };
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "nvidia";
-	MOZ_DISABLE_RDD_SANDBOX = "1";
+    MOZ_DISABLE_RDD_SANDBOX = "1";
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -89,10 +89,10 @@
   };
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  # services.xserver.xkb = {
+  #   layout = "us";
+  #   variant = "";
+  # };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.villiamr = {
