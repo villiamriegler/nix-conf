@@ -3,6 +3,8 @@
 {
   home.packages = with pkgs; [
     quickshell
+	papirus-icon-theme
+  	adwaita-icon-theme
   ];
 
   programs.quickshell = {
