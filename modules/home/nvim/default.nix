@@ -20,7 +20,7 @@
 	  pyright
 	  python314Packages.python-lsp-server
     ] ++ [
-	  inputs.tree-sitter.packages.${pkgs.system}.cli
+	  inputs.tree-sitter.packages.${pkgs.stdenv.hostPlatform.system}.cli
 	];
 
   };
