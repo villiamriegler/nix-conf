@@ -16,6 +16,7 @@
   };
 
   home.packages = with pkgs; [
+    prismlauncher
     git
     kitty
     fuzzel
