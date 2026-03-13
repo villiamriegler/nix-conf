@@ -37,10 +37,27 @@
     ];
     siteFunctions = {
       rebuild = ''
-        				local default_loc=''${2:-.}
-        				sudo nixos-rebuild switch --flake ''$default_loc#''${1:?usage: rebuild <profile> (?<flake_path>)}
-        			'';
-    };
+        		local default_loc=''${2:-.}
+        		sudo nixos-rebuild switch --flake ''$default_loc#''${1:?usage: rebuild <profile> (?<flake_path>)}
+      '';
+      nix-which = ''
+          local dir="/bin"
+          local name
 
+          if [ "$1" = "--lib" ]; then
+            dir="/lib"
+            shift
+          fi
+
+          name="$1"
+
+          if [ -z "$name" ]; then
+            echo "usage: nix-which [--lib] <name>" >&2
+            return 1
+          fi
+
+          nix-locate --at-root "''${dir}/''${name}"
+      '';
+    };
   };
 }
