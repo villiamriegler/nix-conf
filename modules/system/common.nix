@@ -15,7 +15,8 @@
     options = "--delete-older-than 7d";
   };
 
-  # Enable video decoding with vaapi
+  # Enable video decoding with vaapi (will not be used 
+  # but is available)
   hardware.graphics = {
     enable = true;
 
@@ -23,10 +24,6 @@
       libva
       nvidia-vaapi-driver
     ];
-  };
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "nvidia";
-    MOZ_DISABLE_RDD_SANDBOX = "1";
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -122,6 +119,9 @@
     networkmanagerapplet
   ];
 
+  programs.steam.enable = true;
+
+  services.displayManager.gdm.enable = true;
   programs.niri.enable = true;
   programs.zsh.enable = true;
 
