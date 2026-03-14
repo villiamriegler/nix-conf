@@ -15,6 +15,8 @@
     options = "--delete-older-than 7d";
   };
 
+  services.upower.enable = true;
+
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
