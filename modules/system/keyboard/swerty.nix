@@ -1,5 +1,7 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
+  cfg = config.internal-modules.keyboard;
+
   swerty-keys = pkgs.writeText "swerty" ''
     //Swerty by Johan E. Gustafsson
     partial alphanumeric_keys
@@ -60,11 +62,13 @@ let
   '';
 in
 {
-  services.xserver.xkb = {
-    extraLayouts.swerty = {
-      description = "Swerty (Swedish on US/ANSI)";
-      languages = [ "swe" ];
-      symbolsFile = swerty-keys;
+  config = lib.mkIf (builtins.elem "swerty" cfg.layouts) {
+    services.xserver.xkb = {
+      extraLayouts.swerty = {
+        description = "Swerty (Swedish on US/ANSI)";
+        languages = [ "swe" ];
+        symbolsFile = swerty-keys;
+      };
     };
   };
 }

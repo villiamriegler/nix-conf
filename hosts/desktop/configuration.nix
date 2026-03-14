@@ -17,6 +17,13 @@
 
   networking.hostName = "desktop-nixos"; # Define your hostname.
 
+  internal-modules = {
+	  nvidia.enable = true;
+	  gaming.enable = true;
+
+	  keyboard.layouts = [ "swerty" "us" ];
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

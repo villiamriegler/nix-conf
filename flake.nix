@@ -20,8 +20,8 @@
       };
     };
     nix-index-database = {
-		url = "github:nix-community/nix-index-database";
-  		inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -57,10 +57,10 @@
               home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.sharedModules = [
                 inputs.zen-browser.homeModules.beta
-				inputs.nix-index-database.homeModules.default
+                inputs.nix-index-database.homeModules.default
               ];
 
-              home-manager.users.villiamr = ./home.nix;
+              home-manager.users.villiamr = (hostsDir + "/${hostname}/home.nix");
             }
           ];
         };
