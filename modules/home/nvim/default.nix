@@ -19,6 +19,9 @@
 	  nodePackages.nodejs
 	  pyright
 	  python314Packages.python-lsp-server
+	  java-language-server
+	  jdt-language-server
+	  metals
     ] ++ [
 	  inputs.tree-sitter.packages.${pkgs.stdenv.hostPlatform.system}.cli
 	];

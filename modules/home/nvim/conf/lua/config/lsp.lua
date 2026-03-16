@@ -5,7 +5,10 @@ vim.lsp.enable({
   "nixd",
   "nil_ls",
   "pyright",
-  "pylsp"
+  "pylsp",
+  "jdtls",
+  "metals",
+  "java_language_server",
 })
 
 vim.diagnostic.config({
