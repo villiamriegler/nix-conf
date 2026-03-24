@@ -1,15 +1,20 @@
-{ config, pkgs, ... }:
+{ self, inputs, ... }:
 
 {
-  programs.kitty = {
-    enable = true;
-    shellIntegration.enableZshIntegration = true;
-    enableGitIntegration = true;
+  flake.homeModules.kitty =
+    { config, pkgs, ... }:
+    {
+      programs.kitty = {
+        enable = true;
+        shellIntegration.enableZshIntegration = true;
+        enableGitIntegration = true;
 
-    themeFile = "gruvbox-dark";
+        themeFile = "gruvbox-dark";
 
-    extraConfig = ''
-      	enable_audio_bell no
-    '';
-  };
+        extraConfig = ''
+          	enable_audio_bell no
+        '';
+      };
+
+    };
 }
