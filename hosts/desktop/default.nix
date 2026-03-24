@@ -1,4 +1,4 @@
-{ self, inputs, ... }:
+{ self, inputs, config, ... }:
 {
   flake.nixosConfigurations.desktop = inputs.nixpkgs.lib.nixosSystem {
     modules = [
@@ -15,7 +15,7 @@
 			inputs.nix-index-database.homeModules.default
 		];
 
-        home-manager.users.villiamr.imports = [
+        home-manager.users.${self.meta.identity.username}.imports = [
           self.homeModules.desktop
         ];
       }

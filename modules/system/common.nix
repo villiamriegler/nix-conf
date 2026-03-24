@@ -54,13 +54,7 @@
       # };
 
       # Define a user account. Don't forget to set a password with ‘passwd’.
-      users.users.villiamr = {
-        isNormalUser = true;
-        description = "villiamr";
-        extraGroups = [
-          "networkmanager"
-          "wheel"
-        ];
+      users.users.${self.meta.identity.username} = {
         shell = pkgs.zsh;
         packages = with pkgs; [
           google-chrome

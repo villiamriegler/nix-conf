@@ -5,15 +5,13 @@
     { config, pkgs, lib, ... }:
     {
       imports = [
+	    self.homeModules.base
 	    self.homeModules.kitty
 		self.homeModules.niri
 		self.homeModules.nvim
 		self.homeModules.quickshell
 		self.homeModules.zsh
       ];
-
-      home.username = "villiamr";
-      home.homeDirectory = "/home/villiamr";
 
       programs.direnv = {
         enable = true;
@@ -82,8 +80,8 @@
       programs.git = {
         enable = true;
         settings = {
-          user.name = "villiamriegler";
-          user.email = "ville@riegler.se";
+          user.name = self.meta.identity.name;
+          user.email = self.meta.identity.email;
         };
       };
 
