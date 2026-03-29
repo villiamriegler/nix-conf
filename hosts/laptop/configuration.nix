@@ -14,13 +14,27 @@
 		self.nixosModules.base
 		self.nixosModules.common
 		self.nixosModules.keyboard
+        self.nixosModules.Niri
       ];
 
       # Bootloader.
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
 
-      networking.hostName = "desktop-nixos"; # Define your hostname.
+      networking.hostName = "laptop-nixos"; # Define your hostname.
+
+      window-managers.niri.outputs = {
+        "eDP-1" = {
+          mode = "1920x1200@59.88";
+          position = _: {
+            props = {
+              x = 0;
+              y = 0;
+            };
+          };
+          focus-at-startup = _: { };
+        };
+      };
 
       internal-modules = {
         keyboard.layouts = [ "se" ];

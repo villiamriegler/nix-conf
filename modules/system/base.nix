@@ -23,28 +23,13 @@
       environment.systemPackages = with pkgs; [
         vim
         wget
-        niri
-        xwayland-satellite
       ];
 
       services.displayManager.gdm.enable = true;
-      programs.niri.enable = true;
+      #programs.niri.enable = true;
       programs.zsh.enable = true;
 
-
-      xdg.portal = {
-        enable = true;
-        extraPortals = with pkgs; [
-          xdg-desktop-portal-gtk
-          xdg-desktop-portal-gnome
-        ];
-      };
-
-      services.gnome.gnome-keyring.enable = true;
       services.libinput.enable = true;
-
-      security.polkit.enable = true;
-      security.pam.services.hyprlock = { };
 
       # Some programs need SUID wrappers, can be configured further or are
       # started in user sessions.

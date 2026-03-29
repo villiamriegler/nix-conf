@@ -22,14 +22,7 @@
 
       home.packages = with pkgs; [
         git
-        kitty
-        fuzzel
-        mako
-        swaybg
-        swayidle
-        hyprlock
         lazygit
-        neofetch
         fastfetch
         discord
         tree

@@ -10,11 +10,12 @@
     {
       imports = [
         # Include the results of the hardware scan.
-		self.nixosModules.base
-		self.nixosModules.common
-		self.nixosModules.gaming
-		self.nixosModules.nvidia
-		self.nixosModules.keyboard
+        self.nixosModules.base
+        self.nixosModules.common
+        self.nixosModules.gaming
+        self.nixosModules.nvidia
+        self.nixosModules.keyboard
+        self.nixosModules.Niri
       ];
 
       # Bootloader.
@@ -23,13 +24,37 @@
 
       networking.hostName = "desktop-nixos"; # Define your hostname.
 
+      window-managers.niri.outputs = {
+        "PNP(BNQ) BenQ SW271 P4J00325SL0" = {
+          mode = "3840x2160@60.001";
+          scale = 1.5;
+          position = _: {
+            props = {
+              x = 0;
+              y = 0;
+            };
+          };
+          focus-at-startup = _: { };
+        };
+        "Acer Technologies Acer XF240H 0x6390D9CE" = {
+          mode = "1920x1080@119.982";
+          scale = 1;
+          position = _: {
+            props = {
+              x = 2560;
+              y = 180;
+            };
+          };
+        };
+      };
+
       internal-modules = {
         nvidia.enable = true;
         gaming.enable = true;
 
         keyboard.layouts = [
-          "swerty"
           "us"
+          "swerty"
         ];
       };
 
