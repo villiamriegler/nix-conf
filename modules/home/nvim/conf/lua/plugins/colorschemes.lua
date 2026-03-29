@@ -4,7 +4,6 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
-			vim.cmd([[colorscheme gruvbox]])
 		end
 	},
 	{
@@ -13,8 +12,9 @@ return {
 		priority = 1000,
 		config = function()
 			require("catppuccin").setup({
-				flavour = "frappe", -- latte, frappe, macchiato, mocha
+				flavour = "mocha", -- latte, frappe, macchiato, mocha
 			})
+			vim.cmd([[colorscheme catppuccin]])
 		end
 	}
 }

@@ -31,6 +31,7 @@
             python314Packages.python-lsp-server
             java-language-server
             jdt-language-server
+			haskell-language-server
             metals
           ]
           ++ [

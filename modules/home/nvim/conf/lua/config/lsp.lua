@@ -9,6 +9,7 @@ vim.lsp.enable({
   "jdtls",
   "metals",
   "java_language_server",
+  "hls",
 })
 
 vim.diagnostic.config({
