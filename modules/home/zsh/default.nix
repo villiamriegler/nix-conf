@@ -2,11 +2,33 @@
 {
   flake.homeModules.zsh =
     { config, pkgs, ... }:
-
     {
       home.packages = with pkgs; [
         zsh
       ];
+
+      home.file."Templates/devshellTemplate.nix".text = ''
+        {
+          description = "Devshell template";
+
+          inputs = {
+            nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+          };
+
+          outputs =
+            { self, nixpkgs, ... }:
+            let
+              system = "x86_64-linux";
+              pkgs = import nixpkgs { inherit system; };
+            in
+            {
+                devShells.''${system}.default = pkgs.mkShell {
+                    packages = with pkgs; [];
+                };
+            };
+        }
+      '';
+
 
       programs.zsh = {
         enable = true;
@@ -26,6 +48,7 @@
           cdconf = "cd ~/.config/nixos-conf";
           clear = "clear && fastfetch";
         };
+
         initContent = ''
           			source ~/.p10k.zsh
           			fastfetch
@@ -36,8 +59,8 @@
             src = pkgs.zsh-powerlevel10k;
             file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
           }
-
         ];
+
         siteFunctions = {
           rebuild = ''
             		local default_loc=''${2:-.}
@@ -60,6 +83,11 @@
             fi
 
             nix-locate --at-root "''${dir}/''${name}"
+          '';
+          init-shell = ''
+            cat ~/Templates/devshellTemplate.nix > flake.nix
+            echo "use flake" > .envrc
+            direnv allow
           '';
         };
       };
