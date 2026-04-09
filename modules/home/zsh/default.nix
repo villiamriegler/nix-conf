@@ -45,7 +45,7 @@
         };
 
         shellAliases = {
-          cdconf = "cd ~/.config/nixos-conf";
+          cdconf = "cd ~/.config/nix-conf";
           clear = "clear && fastfetch";
         };
 
