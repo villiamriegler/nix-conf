@@ -23,7 +23,7 @@
 
       networking.hostName = "laptop-nixos"; # Define your hostname.
 
-      window-managers.niri.outputs = {
+      window-managers.niri.settings.outputs = {
         "eDP-1" = {
           mode = "1920x1200@59.88";
           position = _: {

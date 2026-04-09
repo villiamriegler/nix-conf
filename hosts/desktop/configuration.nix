@@ -24,7 +24,7 @@
 
       networking.hostName = "desktop-nixos"; # Define your hostname.
 
-      window-managers.niri.outputs = {
+      window-managers.niri.settings.outputs = {
         "PNP(BNQ) BenQ SW271 P4J00325SL0" = {
           mode = "3840x2160@60.001";
           scale = 1.5;
