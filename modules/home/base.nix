@@ -22,6 +22,7 @@
 
       home.packages = with pkgs; [
         git
+        hledger
         lazygit
         fastfetch
         discord
@@ -29,5 +30,9 @@
         firefox
         obsidian
       ];
+
+      home.sessionVariables = {
+          LEDGER_FILE = "${config.home.homeDirectory}/Finance/2026.journal";
+      };
 	};
 }
