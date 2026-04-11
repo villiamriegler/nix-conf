@@ -213,12 +213,13 @@
 
             "Mod+Page_Down".focus-workspace-down = _: { };
             "Mod+Page_Up".focus-workspace-up = _: { };
-            "Mod+U".focus-workspace-down = _: { };
-            "Mod+I".focus-workspace-up = _: { };
+            "Mod+Alt+J".focus-workspace-down = _: { };
+            "Mod+Alt+K".focus-workspace-up = _: { };
+
             "Mod+Ctrl+Page_Down".move-column-to-workspace-down = _: { };
             "Mod+Ctrl+Page_Up".move-column-to-workspace-up = _: { };
-            "Mod+Ctrl+U".move-column-to-workspace-down = _: { };
-            "Mod+Ctrl+I".move-column-to-workspace-up = _: { };
+            "Mod+Ctrl+Alt+J".move-column-to-workspace-down = _: { };
+            "Mod+Ctrl+Alt+K".move-column-to-workspace-up = _: { };
 
             "Mod+WheelScrollDown" = _: {
               props.cooldown-ms = 150;
@@ -239,8 +240,8 @@
 
             "Mod+Shift+Page_Down".move-workspace-down = _: { };
             "Mod+Shift+Page_Up".move-workspace-up = _: { };
-            "Mod+Shift+U".move-workspace-down = _: { };
-            "Mod+Shift+I".move-workspace-up = _: { };
+            "Mod+Shift+Alt+J".move-workspace-down = _: { };
+            "Mod+Shift+Alt+K".move-workspace-up = _: { };
 
             "Mod+WheelScrollRight".focus-column-right = _: { };
             "Mod+WheelScrollLeft".focus-column-left = _: { };
