@@ -20,7 +20,7 @@
             The settings to configure for niri. The keys match precicely 
             the original as this is a direct port from:
             https://birdeehub.github.io/nix-wrapper-modules/wrapperModules/niri.html#settings          
-            '';
+          '';
         };
       };
 
@@ -63,6 +63,27 @@
       lib,
       ...
     }:
+    let
+      mkMenu =
+        menu:
+        let
+          configFile = pkgs.writeText "config.yaml" (
+            pkgs.lib.generators.toYAML { } {
+              anchor = "bottom-right";
+              color = "#ebdbb2";
+              border = "#928374";
+              background = "#282828";
+              border_width = 1;
+              inherit menu;
+            }
+          );
+        in
+        pkgs.writeShellScriptBin "which-key-menu" ''
+          exec ${lib.getExe pkgs.wlr-which-key} ${configFile}
+        '';
+
+      callMenu = menu: lib.getExe (mkMenu menu);
+    in
     {
       packages.wrapped-niri = pkgs.callPackage ./_package {
         inherit pkgs inputs;
@@ -166,60 +187,147 @@
             "Mod+D".spawn = [ "${lib.getExe pkgs.fuzzel}" ];
             "Super+Alt+L".spawn = [ "${lib.getExe pkgs.hyprlock}" ];
 
-            "Mod+O" = _: {
-              props.repeat = false;
-              content.toggle-overview = _: { };
-            };
             "Mod+Q" = _: {
               props.repeat = false;
               content.close-window = _: { };
             };
 
-            "Mod+Left".focus-column-left = _: { };
-            "Mod+Down".focus-window-down = _: { };
-            "Mod+Up".focus-window-up = _: { };
-            "Mod+Right".focus-column-right = _: { };
             "Mod+L".focus-column-right = _: { };
             "Mod+H".focus-column-left = _: { };
             "Mod+J".focus-window-down = _: { };
             "Mod+K".focus-window-up = _: { };
 
-            "Mod+Ctrl+Left".move-column-left = _: { };
-            "Mod+Ctrl+Down".move-window-down = _: { };
-            "Mod+Ctrl+Up".move-window-up = _: { };
-            "Mod+Ctrl+Right".move-column-right = _: { };
-            "Mod+Ctrl+L".move-column-right = _: { };
-            "Mod+Ctrl+H".move-column-left = _: { };
-            "Mod+Ctrl+J".move-window-down = _: { };
-            "Mod+Ctrl+K".move-window-up = _: { };
+            "Mod+M".spawn-sh = callMenu [
+              {
+                key = "h";
+                desc = "Move column left";
+                cmd = "niri msg action move-column-left";
+              }
+              {
+                key = "l";
+                desc = "Move column right";
+                cmd = "niri msg action move-column-right";
+              }
+              {
+                key = "j";
+                desc = "Move window down";
+                cmd = "niri msg action move-window-down";
+              }
+              {
+                key = "k";
+                desc = "Move window up";
+                cmd = "niri msg action move-window-up";
+              }
+              {
+                key = "t";
+                desc = "Toggle tabbed mode";
+                cmd = "niri msg action toggle-column-tabbed-display";
+              }
+              {
+                key = "o";
+                desc = "Move across outputs";
+                submenu = [
+                  {
+                    key = "h";
+                    desc = "Move to monitor left";
+                    cmd = "niri msg action move-column-to-monitor-left";
+                  }
+                  {
+                    key = "l";
+                    desc = "Move to monitor right";
+                    cmd = "niri msg action move-column-to-monitor-right";
+                  }
+                  {
+                    key = "j";
+                    desc = "Move to monitor down";
+                    cmd = "niri msg action move-column-to-monitor-down";
+                  }
+                  {
+                    key = "k";
+                    desc = "Move to monitor up";
+                    cmd = "niri msg action move-column-to-monitor-up";
+                  }
+                ];
+              }
+              {
+                key = "w";
+                desc = "Move across workspaces";
+                submenu = [
+                  {
+                    key = "j";
+                    desc = "Move to workspace down";
+                    cmd = "niri msg action move-column-to-workspace-down";
+                  }
+                  {
+                    key = "k";
+                    desc = "Move to workspace up";
+                    cmd = "niri msg action move-column-to-workspace-up";
+                  }
+                ];
+              }
+              {
+                key = "c";
+                desc = "Consume into";
+                submenu = [
+                  {
+                    key = "h";
+                    desc = "Consume into left";
+                    cmd = "niri msg action consume-or-expel-window-left";
+                  }
+                  {
+                    key = "l";
+                    desc = "Consume into right";
+                    cmd = "niri msg action consume-or-expel-window-right";
+                  }
+                ];
+              }
+            ];
 
-            "Mod+Shift+Left".focus-monitor-left = _: { };
-            "Mod+Shift+Down".focus-monitor-down = _: { };
-            "Mod+Shift+Up".focus-monitor-up = _: { };
-            "Mod+Shift+Right".focus-monitor-right = _: { };
-            "Mod+Shift+L".focus-monitor-right = _: { };
-            "Mod+Shift+H".focus-monitor-left = _: { };
-            "Mod+Shift+J".focus-monitor-down = _: { };
-            "Mod+Shift+K".focus-monitor-up = _: { };
+            # Have never used these, if they may be useful 
+            # probably move them into mod+m or mod+w
+            "Mod+Shift+Alt+J".move-workspace-down = _: { };
+            "Mod+Shift+Alt+K".move-workspace-up = _: { };
 
-            "Mod+Shift+Ctrl+Left".move-column-to-monitor-left = _: { };
-            "Mod+Shift+Ctrl+Down".move-column-to-monitor-down = _: { };
-            "Mod+Shift+Ctrl+Up".move-column-to-monitor-up = _: { };
-            "Mod+Shift+Ctrl+Right".move-column-to-monitor-right = _: { };
-            "Mod+Shift+Ctrl+L".move-column-to-monitor-right = _: { };
-            "Mod+Shift+Ctrl+H".move-column-to-monitor-left = _: { };
-            "Mod+Shift+Ctrl+J".move-column-to-monitor-down = _: { };
-            "Mod+Shift+Ctrl+K".move-column-to-monitor-up = _: { };
+            "Mod+W".spawn-sh = callMenu [
+              {
+                key = "j";
+                desc = "Focus workspace down";
+                cmd = "niri msg action focus-workspace-down";
+              }
+              {
+                key = "k";
+                desc = "Focus workspace up";
+                cmd = "niri msg action focus-workspace-up";
+              }
+            ];
 
-            "Mod+Page_Down".focus-workspace-down = _: { };
-            "Mod+Page_Up".focus-workspace-up = _: { };
-            "Mod+Alt+J".focus-workspace-down = _: { };
-            "Mod+Alt+K".focus-workspace-up = _: { };
-
-            "Mod+Ctrl+Page_Down".move-column-to-workspace-down = _: { };
-            "Mod+Ctrl+Page_Up".move-column-to-workspace-up = _: { };
-            "Mod+Ctrl+Alt+J".move-column-to-workspace-down = _: { };
-            "Mod+Ctrl+Alt+K".move-column-to-workspace-up = _: { };
+            "Mod+O".spawn-sh = callMenu [
+              {
+                key = "o";
+                desc = "Toggle overview";
+                cmd = "niri msg action toggle-overview";
+              }
+              {
+                key = "l";
+                desc = "Focus output right";
+                cmd = "niri msg action focus-monitor-right";
+              }
+              {
+                key = "h";
+                desc = "Focus output left";
+                cmd = "niri msg action focus-monitor-left";
+              }
+              {
+                key = "j";
+                desc = "Focus output down";
+                cmd = "niri msg action focus-monitor-down";
+              }
+              {
+                key = "k";
+                desc = "Focus output up";
+                cmd = "niri msg action focus-monitor-up";
+              }
+            ];
 
             "Mod+WheelScrollDown" = _: {
               props.cooldown-ms = 150;
@@ -237,11 +345,6 @@
               props.cooldown-ms = 150;
               content.move-column-to-workspace-up = _: { };
             };
-
-            "Mod+Shift+Page_Down".move-workspace-down = _: { };
-            "Mod+Shift+Page_Up".move-workspace-up = _: { };
-            "Mod+Shift+Alt+J".move-workspace-down = _: { };
-            "Mod+Shift+Alt+K".move-workspace-up = _: { };
 
             "Mod+WheelScrollRight".focus-column-right = _: { };
             "Mod+WheelScrollLeft".focus-column-left = _: { };
@@ -272,13 +375,6 @@
             "Mod+Ctrl+8".move-column-to-workspace = 8;
             "Mod+Ctrl+9".move-column-to-workspace = 9;
 
-            "Mod+BracketLeft".consume-or-expel-window-left = _: { };
-            "Mod+BracketRight".consume-or-expel-window-right = _: { };
-            "Mod+Comma".consume-window-into-column = _: { };
-            "Mod+Period".expel-window-from-column = _: { };
-
-            "Mod+W".toggle-column-tabbed-display = _: { };
-
             "Mod+R".switch-preset-column-width = _: { };
             "Mod+F".maximize-column = _: { };
             "Mod+Shift+F".fullscreen-window = _: { };
@@ -287,7 +383,7 @@
             "Ctrl+Print".screenshot-screen = _: { };
             "Alt+Print".screenshot-window = _: { };
 
-            "Mod+M".set-dynamic-cast-monitor = _: { };
+            # "Mod+M".set-dynamic-cast-monitor = _: { };
 
             "Mod+Shift+P".power-off-monitors = _: { };
 
