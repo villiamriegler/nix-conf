@@ -26,7 +26,6 @@
             fd
             luarocks
             python3
-            nodePackages.nodejs
             pyright
             python314Packages.python-lsp-server
             java-language-server
