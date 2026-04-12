@@ -37,6 +37,7 @@
         (inputs.import-tree [
           ./modules
           ./hosts
+          ./lib
         ])
       ];
     };
