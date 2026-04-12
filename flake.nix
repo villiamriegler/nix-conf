@@ -23,57 +23,22 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
+    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
   };
 
   outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      home-manager,
-      ...
-    }:
-    let
-      # Directory containing host definitions.
-      # A host definition defines the system where the configuration should run.
-      hostsDir = ./hosts;
-
-      # Extracts all the hostnames from the hostsDir
-      hostNames = builtins.attrNames (
-        nixpkgs.lib.filterAttrs (_: type: type == "directory") (builtins.readDir hostsDir)
-      );
-
-      # Creates a system configuration from a host definition
-      mkHost =
-        { hostname }:
-        nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            (hostsDir + "/${hostname}/configuration.nix")
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.sharedModules = [
-                inputs.zen-browser.homeModules.beta
-                inputs.nix-index-database.homeModules.default
-              ];
-
-              home-manager.users.villiamr = (hostsDir + "/${hostname}/home.nix");
-            }
-          ];
-        };
-
-      # Host systems defined from the host definitions
-      hosts = builtins.listToAttrs (
-        map (hostname: {
-          name = hostname;
-          value = mkHost { hostname = hostname; };
-        }) hostNames
-      );
-    in
-    {
-      nixosConfigurations = hosts;
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+	  systems = [ "x86_64-linux" ];
+      imports = [
+		inputs.home-manager.flakeModules.home-manager
+        (inputs.import-tree [
+          ./modules
+          ./hosts
+          ./lib
+        ])
+      ];
     };
 }

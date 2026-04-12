@@ -1,63 +1,95 @@
-{ config, pkgs, ... }:
-
+{ self, inputs, ... }:
 {
-  home.packages = with pkgs; [
-    zsh
-  ];
+  flake.homeModules.zsh =
+    { config, pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        zsh
+      ];
 
-  programs.zsh = {
-    enable = true;
-    oh-my-zsh.enable = true;
+      home.file."Templates/devshellTemplate.nix".text = ''
+        {
+          description = "Devshell template";
 
-    autosuggestion = {
-      enable = true;
-      # Think about strategy later. Want to try out completion
-    };
+          inputs = {
+            nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+          };
 
-    history = {
-      expireDuplicatesFirst = true;
-      ignoreAllDups = true;
-    };
-
-    shellAliases = {
-      cdconf = "cd ~/.config/nixos-conf";
-      clear = "clear && fastfetch";
-    };
-    initContent = ''
-      			source ~/.p10k.zsh
-      			fastfetch
-      		'';
-    plugins = [
-      {
-        name = "powerlevel10k";
-        src = pkgs.zsh-powerlevel10k;
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      }
-
-    ];
-    siteFunctions = {
-      rebuild = ''
-        		local default_loc=''${2:-.}
-        		sudo nixos-rebuild switch --flake ''$default_loc#''${1:?usage: rebuild <profile> (?<flake_path>)}
+          outputs =
+            { self, nixpkgs, ... }:
+            let
+              system = "x86_64-linux";
+              pkgs = import nixpkgs { inherit system; };
+            in
+            {
+                devShells.''${system}.default = pkgs.mkShell {
+                    packages = with pkgs; [];
+                };
+            };
+        }
       '';
-      nix-which = ''
-          local dir="/bin"
-          local name
 
-          if [ "$1" = "--lib" ]; then
-            dir="/lib"
-            shift
-          fi
 
-          name="$1"
+      programs.zsh = {
+        enable = true;
+        oh-my-zsh.enable = true;
 
-          if [ -z "$name" ]; then
-            echo "usage: nix-which [--lib] <name>" >&2
-            return 1
-          fi
+        autosuggestion = {
+          enable = true;
+          # Think about strategy later. Want to try out completion
+        };
 
-          nix-locate --at-root "''${dir}/''${name}"
-      '';
+        history = {
+          expireDuplicatesFirst = true;
+          ignoreAllDups = true;
+        };
+
+        shellAliases = {
+          cdconf = "cd ~/.config/nix-conf";
+          clear = "clear && fastfetch";
+        };
+
+        initContent = ''
+          			source ~/.p10k.zsh
+          			fastfetch
+          		'';
+        plugins = [
+          {
+            name = "powerlevel10k";
+            src = pkgs.zsh-powerlevel10k;
+            file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+          }
+        ];
+
+        siteFunctions = {
+          rebuild = ''
+            		local default_loc=''${2:-.}
+            		sudo nixos-rebuild switch --flake ''$default_loc#''${1:?usage: rebuild <profile> (?<flake_path>)}
+          '';
+          nix-which = ''
+            local dir="/bin"
+            local name
+
+            if [ "$1" = "--lib" ]; then
+              dir="/lib"
+              shift
+            fi
+
+            name="$1"
+
+            if [ -z "$name" ]; then
+              echo "usage: nix-which [--lib] <name>" >&2
+              return 1
+            fi
+
+            nix-locate --at-root "''${dir}/''${name}"
+          '';
+          init-shell = ''
+            cat ~/Templates/devshellTemplate.nix > flake.nix
+            echo "use flake" > .envrc
+            direnv allow
+          '';
+        };
+      };
     };
-  };
 }

@@ -1,15 +1,23 @@
-{ config, pkgs, ... }:
+{ self, inputs, ... }:
 
 {
-  programs.kitty = {
-    enable = true;
-    shellIntegration.enableZshIntegration = true;
-    enableGitIntegration = true;
+  flake.homeModules.kitty =
+    { config, pkgs, ... }:
+    {
+      programs.kitty = {
+        enable = true;
+        shellIntegration.enableZshIntegration = true;
+        enableGitIntegration = true;
 
-    themeFile = "gruvbox-dark";
+        font.name = "JetBrainsMono NF";
+        font.package = pkgs.nerd-fonts.jetbrains-mono;
 
-    extraConfig = ''
-      	enable_audio_bell no
-    '';
-  };
+        themeFile = "gruvbox-dark";
+
+        extraConfig = ''
+          	enable_audio_bell no
+        '';
+      };
+
+    };
 }
