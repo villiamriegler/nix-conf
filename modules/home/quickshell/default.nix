@@ -14,9 +14,6 @@
         systemd.enable = true;
       };
 
-      xdg.configFile."quickshell" = {
-          source = config.lib.file.mkOutOfStoreSymlink "${flake-path}/dotfiles/quickshell";
-          recursive = true;
-      };
+      dotfile.quickshell.recursive = true;
     };
 }

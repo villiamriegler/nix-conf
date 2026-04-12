@@ -44,9 +44,6 @@
           EDITOR = "nvim";
       };
 
-      xdg.configFile."nvim" = {
-          source = config.lib.file.mkOutOfStoreSymlink "${flake-path}/dotfiles/nvim";
-          recursive = true;
-      };
+      dotfile.nvim.recursive = true;
     };
 }
