@@ -1,7 +1,7 @@
 { self, inputs, ... }:
 {
   flake.homeModules.zsh =
-    { config, pkgs, ... }:
+    { config, pkgs, flake-path, ... }:
     {
       home.packages = with pkgs; [
         zsh
@@ -45,7 +45,7 @@
         };
 
         shellAliases = {
-          cdconf = "cd ~/.config/nix-conf";
+          cdconf = "cd ${flake-path}";
           clear = "clear && fastfetch";
         };
 
@@ -63,7 +63,7 @@
 
         siteFunctions = {
           rebuild = ''
-            		local default_loc=''${2:-.}
+            		local default_loc=''${2:-${flake-path}}
             		sudo nixos-rebuild switch --flake ''$default_loc#''${1:?usage: rebuild <profile> (?<flake_path>)}
           '';
           nix-which = ''

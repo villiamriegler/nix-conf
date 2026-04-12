@@ -1,5 +1,5 @@
 {self, inputs, ... } : {
-	flake.homeModules.base = { config, pkgs, lib, ... }:
+	flake.homeModules.base = { config, pkgs, flake-path, lib, ... }:
 	{
       programs.direnv = {
         enable = true;
@@ -33,6 +33,7 @@
 
       home.sessionVariables = {
           LEDGER_FILE = "${config.home.homeDirectory}/Finance/2026.journal";
+          FLAKE_PATH = flake-path;
       };
 	};
 }
