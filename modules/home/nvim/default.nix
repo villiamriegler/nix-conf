@@ -5,9 +5,9 @@
       inputs,
       config,
       pkgs,
+      flake-path,
       ...
     }:
-
     {
       programs.neovim = {
         enable = true;
@@ -45,7 +45,8 @@
       };
 
       xdg.configFile."nvim" = {
-        source = ./conf;
+          source = config.lib.file.mkOutOfStoreSymlink "${flake-path}/dotfiles/nvim";
+          recursive = true;
       };
     };
 }

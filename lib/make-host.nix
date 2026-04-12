@@ -5,11 +5,17 @@
       {
         nixos-modules,
         home-modules,
+        flake-path ? null
       }:
       inputs.nixpkgs.lib.nixosSystem {
+
+        specialArgs = { inherit flake-path; };
+
         modules = nixos-modules ++ [
           inputs.home-manager.nixosModules.home-manager
           {
+            home-manager.extraSpecialArgs = { inherit flake-path; };
+
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
