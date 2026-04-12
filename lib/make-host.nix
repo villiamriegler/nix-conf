@@ -5,7 +5,7 @@
       {
         nixos-modules,
         home-modules,
-        flake-path ? null
+        flake-path
       }:
       inputs.nixpkgs.lib.nixosSystem {
 
