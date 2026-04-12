@@ -2,7 +2,7 @@
 	flake.nixosModules.keyboard = 
 	{ config, lib, pkgs, ... }:
 	let
-	  cfg = config.internal-modules.keyboard;
+	  cfg = config.keyboard;
 
 	  swerty-keys = pkgs.writeText "swerty" ''
 		//Swerty by Johan E. Gustafsson

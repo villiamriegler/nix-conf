@@ -2,8 +2,11 @@
 {
   flake.nixosModules.keyboard =
     { config, lib, ... }:
+    let 
+        cfg = config.keyboard;
+    in
     {
-      options.internal-modules.keyboard = {
+      options.keyboard = {
         layouts = lib.mkOption {
           type = lib.types.listOf lib.types.str;
           default = [ "se" ];
@@ -25,9 +28,9 @@
 
       config = {
         services.xserver.xkb = {
-          layout = builtins.concatStringsSep "," config.internal-modules.keyboard.layouts;
+          layout = builtins.concatStringsSep "," cfg.layouts;
           options =
-            with config.internal-modules.keyboard;
+            with cfg;
             builtins.concatStringsSep "," [
               toggle-layouts
               lv3-options

@@ -9,8 +9,6 @@
     { pkgs, lib, ... }:
     {
       imports = [
-        # Include the results of the hardware scan.
-        #./hardware-configuration.nix
 		self.nixosModules.base
 		self.nixosModules.common
 		self.nixosModules.keyboard
@@ -36,9 +34,7 @@
         };
       };
 
-      internal-modules = {
-        keyboard.layouts = [ "se" ];
-      };
+      keyboard.layouts = [ "se" ];
 
       # This value determines the NixOS release from which the default
       # settings for stateful data, like file locations and database versions
