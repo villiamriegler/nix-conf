@@ -71,6 +71,9 @@ local keymaps = {
 	end, { desc = "Reload session" } },
 }
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 for _, map in ipairs(keymaps) do
 	local mode, lhs, rhs, opts = unpack(map)
 	vim.keymap.set(mode, lhs, rhs, opts)

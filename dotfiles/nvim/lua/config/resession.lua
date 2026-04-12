@@ -1,3 +1,7 @@
+vim.pack.add {
+    'https://github.com/stevearc/resession.nvim',
+}
+
 local resession = require("resession")
 
 resession.setup()

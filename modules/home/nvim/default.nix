@@ -13,6 +13,9 @@
         enable = true;
 
         extraPackages = with pkgs; [
+            nodejs_25
+            ripgrep
+            fd
         ];
 
       };
