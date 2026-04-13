@@ -1,34 +1,17 @@
 { self, inputs, ... }:
 {
   flake.homeModules.zsh =
-    { config, pkgs, flake-path, ... }:
     {
-      home.packages = with pkgs; [
-        zsh
-      ];
-
-      home.file."Templates/devshellTemplate.nix".text = ''
-        {
-          description = "Devshell template";
-
-          inputs = {
-            nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-          };
-
-          outputs =
-            { self, nixpkgs, ... }:
-            let
-              system = "x86_64-linux";
-              pkgs = import nixpkgs { inherit system; };
-            in
-            {
-                devShells.''${system}.default = pkgs.mkShell {
-                    packages = with pkgs; [];
-                };
-            };
-        }
-      '';
-
+      config,
+      pkgs,
+      flake-path,
+      ...
+    }:
+    {
+      home.file."Templates" = {
+        source = ./_templates;
+        recursive = true;
+      };
 
       programs.zsh = {
         enable = true;
@@ -50,9 +33,9 @@
         };
 
         initContent = ''
-          			source ~/.p10k.zsh
-          			fastfetch
-          		'';
+          source ~/.p10k.zsh
+          fastfetch
+        '';
         plugins = [
           {
             name = "powerlevel10k";
@@ -63,8 +46,8 @@
 
         siteFunctions = {
           rebuild = ''
-            		local default_loc=''${2:-${flake-path}}
-            		sudo nixos-rebuild switch --flake ''$default_loc#''${1:?usage: rebuild <profile> (?<flake_path>)}
+            local default_loc=''${2:-${flake-path}}
+            sudo nixos-rebuild switch --flake ''$default_loc#''${1:?usage: rebuild <profile> (?<flake_path>)}
           '';
           nix-which = ''
             local dir="/bin"
@@ -85,7 +68,8 @@
             nix-locate --at-root "''${dir}/''${name}"
           '';
           init-shell = ''
-            cat ~/Templates/devshellTemplate.nix > flake.nix
+            cat ~/Templates/devshell.nix > flake.nix
+            cat ~/Templates/local-nvim.lua > .nvim.lua
             echo "use flake" > .envrc
             direnv allow
           '';

@@ -104,19 +104,19 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nvim-tree-sitter-queries": {
+      "flake": false,
       "locked": {
-        "lastModified": 1775579569,
-        "narHash": "sha256-/m3yyS/EnXqoPGBJYVy4jTOsirdgsEZ3JdN2gGkBr14=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "dfd9566f82a6e1d55c30f861879186440614696e",
+        "lastModified": 1775221900,
+        "narHash": "sha256-PQR6tFt4lCrAZNQG7BLMD1IiCKja9wDS1S4laGJf/HE=",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
+        "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
         "type": "github"
       }
     },
@@ -127,35 +127,16 @@
         "import-tree": "import-tree",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
-        "tree-sitter": "tree-sitter",
+        "nvim-tree-sitter-queries": "nvim-tree-sitter-queries",
         "wrapper-modules": "wrapper-modules",
         "zen-browser": "zen-browser"
       }
     },
-    "tree-sitter": {
+    "wrapper-modules": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ]
-      },
-      "locked": {
-        "lastModified": 1772036928,
-        "narHash": "sha256-ZtzwhEmNZg5brghKNiTRZSmY8FwQeWcemY2blq9j2GM=",
-        "owner": "tree-sitter",
-        "repo": "tree-sitter",
-        "rev": "534c4a074cd461ab30d1c8a54bf733d3050221a0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tree-sitter",
-        "ref": "v0.26.6",
-        "repo": "tree-sitter",
-        "type": "github"
-      }
-    },
-    "wrapper-modules": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1775940860,

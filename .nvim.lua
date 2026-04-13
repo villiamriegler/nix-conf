@@ -5,6 +5,13 @@ vim.lsp.enable {
     "qmlls",
 }
 
+local parser_path = vim.env.TREESITTER_PARSER_DIR
+
+if parser_path then
+  vim.opt.runtimepath:append(parser_path)
+end
+
+
 vim.lsp.config("lua_ls" , {
     settings = {
         Lua = {

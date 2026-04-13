@@ -17,11 +17,11 @@
             ripgrep
             fd
         ];
-
       };
 
       home.sessionVariables = {
           EDITOR = "nvim";
+          TREESITTER_QUERY_PATH = "${inputs.nvim-tree-sitter-queries}/runtime";
       };
 
       dotfile.nvim.recursive = true;
