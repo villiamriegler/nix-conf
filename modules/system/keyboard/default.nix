@@ -2,8 +2,8 @@
 {
   flake.nixosModules.keyboard =
     { config, lib, ... }:
-    let 
-        cfg = config.keyboard;
+    let
+      cfg = config.keyboard;
     in
     {
       options.keyboard = {
@@ -27,6 +27,19 @@
       };
 
       config = {
+        services.keyd = {
+          enable = true;
+
+          keyboards.default.settings = {
+            alt = {
+              h = "left";
+              j = "down";
+              k = "up";
+              l = "right";
+            };
+          };
+        };
+
         services.xserver.xkb = {
           layout = builtins.concatStringsSep "," cfg.layouts;
           options =
