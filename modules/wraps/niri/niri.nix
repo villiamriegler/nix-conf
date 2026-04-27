@@ -299,6 +299,16 @@
                 desc = "Focus workspace up";
                 cmd = "niri msg action focus-workspace-up";
               }
+              {
+                key = "w";
+                desc = "Toggle wallpaper selector";
+                cmd = "${lib.getExe self'.packages.Noctalia} ipc call wallpaper toggle";
+              }
+              {
+                key = "r";
+                desc = "Randomize wallpaper";
+                cmd = "${lib.getExe self'.packages.Noctalia} ipc call wallpaper random all";
+              }
             ];
 
             "Mod+O".spawn-sh = callMenu [
