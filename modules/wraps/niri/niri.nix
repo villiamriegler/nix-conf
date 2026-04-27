@@ -45,6 +45,9 @@
         security.polkit.enable = true;
         security.pam.services.hyprlock = { }; # This is an individual choice
 
+        services.gnome.evolution-data-server.enable = true;
+        programs.evolution.enable = true;
+
         # Audio binds require pipewire to be enabled
         services.pipewire = {
           enable = true;

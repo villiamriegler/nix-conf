@@ -80,6 +80,9 @@
           "id": "Clock",
           "tooltipFormat": "HH:mm ddd, MMM dd",
           "useCustomFont": false
+        },
+        {
+          "id": "plugin:weekly-calendar"
         }
       ],
       "right": [
@@ -151,7 +154,7 @@
     "middleClickFollowMouse": false,
     "middleClickCommand": "",
     "rightClickAction": "controlCenter",
-    "rightClickFollowMouse": false,
+    "rightClickFollowMouse": true,
     "rightClickCommand": "",
     "screenOverrides": []
   },
@@ -240,7 +243,7 @@
     "weatherTaliaMascotAlways": false,
     "useFahrenheit": false,
     "use12hourFormat": false,
-    "showWeekNumberInCalendar": false,
+    "showWeekNumberInCalendar": true,
     "showCalendarEvents": true,
     "showCalendarWeather": true,
     "analogClockInCalendar": false,
@@ -318,7 +321,11 @@
     "clipboardWatchTextCommand": "wl-paste --type text --watch cliphist store",
     "clipboardWatchImageCommand": "wl-paste --type image --watch cliphist store",
     "position": "center",
-    "pinnedApps": [],
+    "pinnedApps": [
+      "discord",
+      "zen-beta",
+      "obsidian"
+    ],
     "sortByMostUsed": true,
     "terminalCommand": "alacritty -e",
     "customLaunchPrefixEnabled": false,
