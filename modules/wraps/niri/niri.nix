@@ -174,6 +174,10 @@
             ]
           ];
 
+          switch-events = {
+              lid-close.spawn = [ "${lib.getExe self'.packages.Noctalia}" "ipc" "call" "lockScreen" "lock" ];
+          };
+
           prefer-no-csd = _: { };
 
           screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
