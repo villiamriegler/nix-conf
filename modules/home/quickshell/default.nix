@@ -14,6 +14,6 @@
         systemd.enable = true;
       };
 
-      dotfile.quickshell.recursive = true;
+      #dotfile.quickshell.recursive = true;
     };
 }

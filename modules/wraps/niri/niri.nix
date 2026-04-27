@@ -61,6 +61,7 @@
     {
       pkgs,
       lib,
+      self',
       ...
     }:
     let
@@ -169,13 +170,8 @@
 
           spawn-at-startup = [
             [
-              "${lib.getExe pkgs.swaybg}"
-              "-i"
-              "${./assets/wallpapers/mountain.jpg}"
-              "-m"
-              "fill"
+              (lib.getExe self'.packages.Noctalia)
             ]
-            "${lib.getExe pkgs.mako}"
           ];
 
           prefer-no-csd = _: { };
@@ -184,8 +180,8 @@
 
           binds = {
             "Mod+T".spawn = [ "${lib.getExe pkgs.kitty}" ];
-            "Mod+D".spawn = [ "${lib.getExe pkgs.fuzzel}" ];
-            "Super+Alt+L".spawn = [ "${lib.getExe pkgs.hyprlock}" ];
+            "Mod+D".spawn-sh = [ "${lib.getExe self'.packages.Noctalia} ipc call launcher toggle" ];
+            "Mod+P".spawn-sh = [ "${lib.getExe self'.packages.Noctalia} ipc call sessionMenu toggle" ];
 
             "Mod+Q" = _: {
               props.repeat = false;
@@ -385,60 +381,46 @@
 
             # "Mod+M".set-dynamic-cast-monitor = _: { };
 
-            "Mod+Shift+P".power-off-monitors = _: { };
-
             "XF86AudioRaiseVolume" = _: {
               props.allow-when-locked = true;
-              content.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0";
+              content.spawn-sh = "${lib.getExe self'.packages.Noctalia} ipc call volume increase";
             };
             "XF86AudioLowerVolume" = _: {
               props.allow-when-locked = true;
-              content.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-";
+              content.spawn-sh = "${lib.getExe self'.packages.Noctalia} ipc call volume decrease";
             };
             "XF86AudioMute" = _: {
               props.allow-when-locked = true;
-              content.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+              content.spawn-sh = "${lib.getExe self'.packages.Noctalia} ipc call volume muteOutput";
             };
             "XF86AudioMicMute" = _: {
               props.allow-when-locked = true;
-              content.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+              content.spawn-sh = "${lib.getExe self'.packages.Noctalia} ipc call volume muteInput";
             };
 
             "XF86AudioPlay" = _: {
               props.allow-when-locked = true;
-              content.spawn-sh = "${lib.getExe pkgs.playerctl} play-pause";
+              content.spawn-sh = "${lib.getExe self'.packages.Noctalia} ipc call media playPause";
             };
             "XF86AudioStop" = _: {
               props.allow-when-locked = true;
-              content.spawn-sh = "${lib.getExe pkgs.playerctl} stop";
+              content.spawn-sh = "${lib.getExe self'.packages.Noctalia} ipc call media pause";
             };
             "XF86AudioPrev" = _: {
               props.allow-when-locked = true;
-              content.spawn-sh = "${lib.getExe pkgs.playerctl} previous";
+              content.spawn-sh = "${lib.getExe self'.packages.Noctalia} ipc call media previous";
             };
             "XF86AudioNext" = _: {
               props.allow-when-locked = true;
-              content.spawn-sh = "${lib.getExe pkgs.playerctl} next";
+              content.spawn-sh = "${lib.getExe self'.packages.Noctalia} ipc call media next";
             };
-
             "XF86MonBrightnessUp" = _: {
               props.allow-when-locked = true;
-              content.spawn = [
-                "${lib.getExe pkgs.brightnessctl}"
-                "--class=backlight"
-                "set"
-                "+10%"
-              ];
+              content.spawn-sh = "${lib.getExe self'.packages.Noctalia} ipc call brightness increase";
             };
-
             "XF86MonBrightnessDown" = _: {
               props.allow-when-locked = true;
-              content.spawn = [
-                "${lib.getExe pkgs.brightnessctl}"
-                "--class=backlight"
-                "set"
-                "10%-"
-              ];
+              content.spawn-sh = "${lib.getExe self'.packages.Noctalia} ipc call brightness decrease";
             };
           };
         };
