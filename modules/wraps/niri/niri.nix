@@ -136,7 +136,7 @@
             {
               matches = [
                 {
-                  namespace = "^wallpaper$";
+                  namespace = "^noctalia-wallpaper-.*$";
                 }
               ];
               place-within-backdrop = true;
