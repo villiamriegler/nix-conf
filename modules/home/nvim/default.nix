@@ -11,17 +11,15 @@
     {
       programs.neovim = {
         enable = true;
+	sideloadInitLua = true;
+	defaultEditor = true;
 
         extraPackages = with pkgs; [
             nodejs_25
             ripgrep
             fd
+            tree-sitter
         ];
-      };
-
-      home.sessionVariables = {
-          EDITOR = "nvim";
-          TREESITTER_QUERY_PATH = "${inputs.nvim-tree-sitter-queries}/runtime";
       };
 
       dotfile.nvim.recursive = true;

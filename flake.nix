@@ -24,14 +24,6 @@
 
     wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
     wrapper-modules.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Added because of nvim-treesitter being archived
-    # Parsers can be installed via nixpkgs but that
-    # is not the case for queries. Waiting on solution.
-    nvim-tree-sitter-queries = {
-      url = "github:nvim-treesitter/nvim-treesitter";
-      flake = false;
-    };
   };
 
   outputs =
