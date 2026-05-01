@@ -154,6 +154,9 @@
                   is-focused = true;
                 }
               ];
+              background-effect = {
+                  blur = true;
+              };
               opacity = 0.9;
             }
             {
