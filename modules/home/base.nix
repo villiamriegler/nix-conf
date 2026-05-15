@@ -23,6 +23,7 @@
       home.packages = with pkgs; [
         git
         hledger
+        fzf
         lazygit
         fastfetch
         discord
