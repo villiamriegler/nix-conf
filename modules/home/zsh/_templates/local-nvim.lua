@@ -1,1 +1,3 @@
-vim.lsp.enable { }
+vim.lsp.enable { 
+    "nixd",
+}
