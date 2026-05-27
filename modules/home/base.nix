@@ -30,6 +30,7 @@
         tree
         firefox
         obsidian
+        claude-code
       ];
 
       home.sessionVariables = {
