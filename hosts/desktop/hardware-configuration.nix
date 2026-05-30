@@ -5,7 +5,13 @@
 
 {
   flake.nixosModules.desktopConfiguration =
-    { config, pkgs, lib, modulesPath, ... }:
+    {
+      config,
+      pkgs,
+      lib,
+      modulesPath,
+      ...
+    }:
     {
       imports = [
         (modulesPath + "/installer/scan/not-detected.nix")
@@ -37,7 +43,19 @@
         ];
       };
 
-      swapDevices = [ ];
+      zramSwap = {
+          enable = true;
+          memoryPercent = 50;
+          priority = 100;
+      };
+
+      swapDevices = [
+        {
+            device = "/var/lib/swapfile";
+            size = 16*1024;
+            priority = 10;
+        }
+      ];
 
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
       hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
