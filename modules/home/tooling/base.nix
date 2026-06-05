@@ -12,6 +12,8 @@
         python3
         uv
 
+        devenv
+
         easyrsa
         openvpn
       ];
