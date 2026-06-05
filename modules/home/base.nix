@@ -1,6 +1,10 @@
 {self, inputs, ... } : {
 	flake.homeModules.base = { config, pkgs, flake-path, lib, ... }:
 	{
+      imports = [
+        self.homeModules.tooling
+      ];
+
       programs.direnv = {
         enable = true;
 
