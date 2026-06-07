@@ -15,7 +15,7 @@
 	defaultEditor = true;
 
         extraPackages = with pkgs; [
-            nodejs_25
+            nodejs
             ripgrep
             fd
             tree-sitter

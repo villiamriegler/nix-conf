@@ -6,6 +6,7 @@
     {
 	  imports = [
 	  	self.nixosModules.locale-se
+        self.nixosModules.services
 	  ];
 
       services.upower.enable = true;
@@ -27,7 +28,7 @@
         wget
       ];
 
-      services.displayManager.gdm.enable = true;
+      #services.displayManager.gdm.enable = true;
       #programs.niri.enable = true;
       programs.zsh.enable = true;
 
