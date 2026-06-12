@@ -35,6 +35,8 @@
         firefox
         obsidian
         claude-code
+        slack
+        teams-for-linux
       ];
 
       home.sessionVariables = {
