@@ -36,7 +36,8 @@
         obsidian
         claude-code
         slack
-        teams-for-linux
+        spotify
+        wl-clipboard
       ];
 
       home.sessionVariables = {

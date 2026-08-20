@@ -9,9 +9,9 @@
     { pkgs, lib, ... }:
     {
       imports = [
-		self.nixosModules.base
-		self.nixosModules.common
-		self.nixosModules.keyboard
+        self.nixosModules.base
+        self.nixosModules.common
+        self.nixosModules.keyboard
         self.nixosModules.Niri
       ];
 
@@ -22,19 +22,44 @@
       networking.hostName = "laptop-nixos"; # Define your hostname.
 
       window-managers.niri.settings.outputs = {
-        "eDP-1" = {
-          mode = "1920x1200@59.88";
+        "HDMI-A-1" = {
+          mode = "3840x2160@59.997";
+          scale = 1.5;
           position = _: {
             props = {
               x = 0;
               y = 0;
             };
           };
+        };
+        "DP-1" = {
+          mode = "3840x2160@59.997";
+          scale = 1.5;
+          position = _: {
+            props = {
+              x = 2560;
+              y = 0;
+            };
+          };
+        };
+        "eDP-1" = {
+          mode = "1920x1200@60.001";
+          scale = 1.25;
+          position = _: {
+            props = {
+              x = 2560;
+              y = 240;
+            };
+          };
           focus-at-startup = _: { };
         };
       };
 
-      keyboard.layouts = [ "se" ];
+      keyboard.layouts = [
+        "us"
+        "swerty"
+        "se"
+      ];
 
       hardware.bluetooth.enable = true;
       services.blueman.enable = true;

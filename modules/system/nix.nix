@@ -3,6 +3,16 @@
   flake.nixosModules.base =
     { config, pkgs, ... }:
     {
+      nixpkgs.overlays = [
+        (final: prev: {
+          claude-code =
+            (import inputs.nixpkgs-master {
+              inherit (prev.stdenv.hostPlatform) system;
+              config.allowUnfree = true;
+            }).claude-code;
+        })
+      ];
+
       nix.settings.experimental-features = [
         "nix-command"
         "flakes"

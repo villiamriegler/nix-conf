@@ -12,7 +12,7 @@
         font.name = "JetBrainsMono NF";
         font.package = pkgs.nerd-fonts.jetbrains-mono;
 
-        themeFile = "gruvbox-dark";
+        #themeFile = "gruvbox-dark";
 
         extraConfig = ''
           	enable_audio_bell no

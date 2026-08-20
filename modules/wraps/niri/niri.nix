@@ -166,7 +166,7 @@
                   is-focused = false;
                 }
               ];
-              opacity = 0.5;
+              opacity = 0.7;
             }
             {
               geometry-corner-radius = 8;
